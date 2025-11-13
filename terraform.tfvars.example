@@ -42,7 +42,7 @@ tags = {
   Project   = "Cheese Factory"
   ManagedBy = "Terraform"
   Course    = "Infraestructura como Código"
-  Student   = "Tu Nombre Aquí"  # Personaliza con tu nombre
+  Student   = "Tu Nombre Aquí"  
   Activity  = "Actividad 2.1"
   Section   = "AUY1103"
 }
