@@ -1,0 +1,48 @@
+# Archivo de ejemplo de configuración de variables
+# Copia este archivo a terraform.tfvars y personaliza los valores
+# Comando: cp terraform.tfvars.example terraform.tfvars
+
+# ENTORNO: "dev" o "prod"
+# dev: instancias t2.micro, 1 NAT Gateway
+# prod: instancias t3.small, NAT Gateway por AZ
+environment = "dev"
+
+# Región de AWS
+aws_region = "us-east-1"
+
+# Nombre del proyecto
+project_name = "cheese-factory"
+
+# Configuración de VPC
+vpc_cidr            = "10.0.0.0/16"
+vpc_azs             = ["us-east-1a", "us-east-1b", "us-east-1c"]
+vpc_private_subnets = ["10.0.1.0/24", "10.0.2.0/24", "10.0.3.0/24"]
+vpc_public_subnets  = ["10.0.101.0/24", "10.0.102.0/24", "10.0.103.0/24"]
+
+# Número de instancias EC2
+instance_count = 3
+
+# AMI de Amazon Linux 2 (verificar para tu región)
+ami_id = "ami-0c02fb55956c7d316"
+
+# Imágenes Docker para cada instancia
+docker_images = [
+  "errm/cheese:wensleydale",
+  "errm/cheese:cheddar",
+  "errm/cheese:stilton",
+]
+
+# Tu IP pública para acceso SSH
+# IMPORTANTE: Cambiar 0.0.0.0/0 por tu IP real
+# Obtener en: https://ipinfo.io/ip
+my_ip = "0.0.0.0/0"
+
+# Etiquetas para los recursos
+tags = {
+  Project   = "Cheese Factory"
+  ManagedBy = "Terraform"
+  Course    = "Infraestructura como Código"
+  Student   = "Tu Nombre Aquí"  # Personaliza con tu nombre
+  Activity  = "Actividad 2.1"
+  Section   = "AUY1103"
+}
