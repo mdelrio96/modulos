@@ -8,6 +8,10 @@ terraform {
       source  = "hashicorp/aws"
       version = "~> 5.0"
     }
+    random = {
+      source  = "hashicorp/random"
+      version = "~> 3.1"
+    }
   }
 }
 
@@ -15,12 +19,17 @@ provider "aws" {
   region = var.aws_region
 }
 
+# Generar un ID aleatorio para el nombre del bucket
+resource "random_id" "bucket_suffix" {
+  byte_length = 4
+}
+
 # Módulo público para crear el bucket S3
 module "s3_bucket" {
   source  = "terraform-aws-modules/s3-bucket/aws"
   version = "~> 4.0"
 
-  bucket = var.bucket_name
+  bucket = var.bucket_name != "" ? var.bucket_name : "cheese-factory-mdelrio-${lower(random_id.bucket_suffix.hex)}"
   acl    = "private"
 
   # Habilitar control de acceso mediante ACL
@@ -51,7 +60,7 @@ module "s3_bucket" {
   tags = merge(
     var.tags,
     {
-      Name        = var.bucket_name
+      Name        = var.bucket_name != "" ? var.bucket_name : "cheese-factory-mdelrio-${lower(random_id.bucket_suffix.hex)}"
       Purpose     = "Terraform State Backend"
       Environment = "Infrastructure"
     }

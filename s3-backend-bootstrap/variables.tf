@@ -7,9 +7,9 @@ variable "aws_region" {
 }
 
 variable "bucket_name" {
-  description = "Nombre del bucket S3 para el estado de Terraform (debe ser único globalmente)"
+  description = "Nombre del bucket S3 para el estado de Terraform (debe ser único globalmente). Si se deja vacío, se generará automáticamente con formato 'cheese-factory-mdelrio-{random}'"
   type        = string
-  default     = "cheese-factory-terraform-state-2024"
+  default     = ""
 }
 
 variable "dynamodb_table_name" {
